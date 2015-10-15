@@ -18,6 +18,18 @@ module BulkInsert
         worker
       end
     end
+
+    #########################################################################
+    # helper methods for preparing the columns before a call to :bulk_insert
+    #########################################################################
+
+    def default_bulk_columns
+      self.column_names - %w(id)
+    end
+
+    def bulk_columns_without_timestamps
+      default_bulk_columns - %w(created_at updated_at)
+    end
   end
 end
 
